@@ -1,0 +1,27 @@
+[/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='F1'
+command='gnome-terminal'
+name='Open Terminal'
+
+[/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
+binding='<Super>e'
+command='nautilus'
+name='File Explorer'
+
+[/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2]
+binding='<Super>i'
+command='gnome-control-center'
+name='Control Center'
+
+[/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3]
+binding='<Shift><Super>s'
+command='gnome-screenshot --interactive'
+name='ScreenShot'
+
+[/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4]
+binding='<Shift><Control>Escape'
+command='gnome-system-monitor -p'
+name='taskmgr'
+
+[/org/gnome/settings-daemon/plugins/media-keys]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']

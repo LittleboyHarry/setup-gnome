@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# 自动切换至后台新产生的窗口
+dconf write /org/gnome/shell/extensions/just-perfection/window-demands-attention-focus true
+
+if [ -z "$(dconf read /org/gnome/shell/extensions/just-perfection/notification-banner-position)" ]; then
+    echo
+    read -p "新消息应该在右上侧出现吗 (Y/n)?" r
+    [[ "$r" =~ ^(Y|y|)$ ]] &&
+        dconf write /org/gnome/shell/extensions/just-perfection/notification-banner-position 2
+fi
+
+echo
+read -p "不保留应用菜单 (Y/n)?" r
+[[ "$r" =~ ^(Y|y|)$ ]] &&
+    dconf write /org/gnome/shell/extensions/just-perfection/app-menu false
+
+echo
+read -p "降低顶栏对屏幕空间的占用 (Y/n)?" r
+[[ "$r" =~ ^(Y|y|)$ ]] &&
+    dconf write /org/gnome/shell/extensions/just-perfection/panel-size 36
+
+UUID=just-perfection-desktop@just-perfection
+gnome-extensions list | grep -q $UUID ||
+    gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/Shell --method org.gnome.Shell.Extensions.InstallRemoteExtension $UUID

@@ -1,0 +1,5 @@
+#!/bin/bash
+gsettings set org.gnome.shell.keybindings toggle-message-tray "['<Super>m']"
+dconf write /org/gnome/shell/extensions/clipboard-indicator/toggle-menu "['<Super>v']"
+dconf write /org/gnome/shell/extensions/clipboard-indicator/cache-only-favorites true
+gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/Shell --method org.gnome.Shell.Extensions.InstallRemoteExtension clipboard-indicator@tudmotu.com

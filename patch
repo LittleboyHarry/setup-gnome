@@ -1,0 +1,33 @@
+#!/bin/bash
+case $1 in
+add-minmaxbtn-to-windowbar)
+    gsettings set org.gnome.desktop.wm.preferences button-layout appmenu:minimize,maximize,close
+    ;;
+skip-confirm-before-60s-shutdown-confirm)
+    gsettings set org.gnome.SessionManager logout-prompt false
+    ;;
+no-redundant-char-searchresult)
+    [ -z "$(dconf read /org/gnome/desktop/search-providers/disabled)" ] &&
+        gsettings set org.gnome.desktop.search-providers disabled "['org.gnome.Characters.desktop']"
+    ;;
+optimize-alt-grave-app-switcher-appearance)
+    [[ "$r" =~ ^(Y|y|)$ ]] && dconf load /org/gnome/desktop/wm/keybindings/ <<END
+[/]
+cycle-group=['<Alt>grave']
+cycle-group-backward=['<Shift><Alt>grave']
+END
+    ;;
+show-batterypercentage-weekday-weekdate-in-top-panel)
+    cat <<END | dconf load /org/gnome/desktop/
+[interface]
+show-battery-percentage=true
+clock-show-weekday=true
+
+[calendar]
+show-weekdate=true
+END
+    ;;
+*)
+    echo "Please report the error '$1' for author!"
+    ;;
+esac

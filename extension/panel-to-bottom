@@ -1,0 +1,20 @@
+#!/bin/bash
+gnome-extensions list | grep -q babar@fthx && gnome-extensions disable babar@fthx
+dconf write /org/gnome/shell/extensions/just-perfection/top-panel-position 1
+
+dconf write /org/gnome/shell/extensions/just-perfection/notification-banner-position 4
+dconf write /org/gnome/desktop/enable-hot-corners false
+dconf write /org/gnome/shell/extensions/dash-to-dock/show-apps-at-top true
+dconf write /org/gnome/shell/extensions/custom-hot-corners-extended/monitor-0-bottom-left-0/action "'toggle-overview'"
+dconf write /org/gnome/shell/extensions/custom-hot-corners-extended/monitor-0-bottom-right-0/action "'open-panel-aggregate-menu'"
+
+UUID=dash-to-dock@micxgx.gmail.com
+gnome-extensions list | grep -q $UUID ||
+    gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/Shell --method org.gnome.Shell.Extensions.InstallRemoteExtension $UUID
+
+UUID=custom-hot-corners-extended@G-dH.github.com
+if ! gnome-extensions list | grep -q $UUID; then
+    read -p 'add `Custom Hot Corners Extended` extension? (y/N) ' r
+    [[ "$r" =~ ^(Y|y)$ ]] &&
+        gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/Shell --method org.gnome.Shell.Extensions.InstallRemoteExtension $UUID
+fi
